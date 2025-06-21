@@ -30,7 +30,7 @@ def pitchMatch(currentPitch, targetPitch):
             return 100  # if target pitch is 0, we assume the player is not playing a note
         else:
             return 0
-#  or volumeExtractor.quietCheck()
+
 
 def noteMatch(intendedNote):
     """
