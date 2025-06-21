@@ -4,8 +4,7 @@ import math
 chunk = 250  # length of time between measurements  in ms
 incorrectPenalty = 20  # penalty for being out of tune
 semitoneRounded = 1.0594630943593
-semitoneErrorMult = 4 #multiplier for error within a semitone
-overSemitoneErrorMult = 8 #multiplier for error over a semitone
+
 
 def freq_to_midi(freq):
     return 69 + 12 * math.log2(freq / 440)
