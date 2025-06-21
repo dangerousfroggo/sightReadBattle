@@ -44,6 +44,20 @@ def get_note_freq(duration=0.1):
     p.terminate()
     return freq
 
+def get_note_volume(duration=0.1):
+    """
+    Records `duration` seconds of audio and returns the volume level.
+    """
+    p = pyaudio.PyAudio()
+    stream = p.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=int(RATE * duration))
+    data = stream.read(int(RATE * duration), exception_on_overflow=False)
+    audio = np.frombuffer(data, dtype=np.int16).astype(np.float32)
+    volume = np.sqrt(np.mean(audio**2))  # RMS volume
+    stream.stop_stream()
+    stream.close()
+    p.terminate()
+    print(volume)
+    return volume
 def main():
     print("Testing get_note_freq() - Speak or play a note now...")
     try:
