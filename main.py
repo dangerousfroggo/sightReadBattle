@@ -15,9 +15,9 @@ def mainLoop():
         print(note)
         pitch = audio_pitch_extractor.get_note_freq()
         print(pitch)
-        if pitch is not None:
-            result = audio_pitch_extractor.freq_to_note(pitch)
-            print(result)
+        # if pitch is not None:
+        #     result = audio_pitch_extractor.freq_to_note(pitch)
+        #     print(result)
         time.sleep(60.0/bpm)
 
 if __name__ == "__main__":
