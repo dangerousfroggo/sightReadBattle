@@ -11,14 +11,14 @@ function App() {
         Clef Clash
       </h1>
       <div className="gamemode-buttons-container"> {/* this contains the buttons of casual, competitive, and practice */}
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button className="gamemode" onClick={() => setCount((count) => count + 1)}>
           Casual
           {/*<img src={viteLogo} className="logo vite" alt="Vite logo" />*/}
         </button>
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button className="gamemode" onClick={() => setCount((count) => count + 1)}>
           Competitive
         </button>
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button className="gamemode" onClick={() => setCount((count) => count + 1)}>
           Practice
         </button>
       </div>
