@@ -2,7 +2,7 @@ import time
 import audio_pitch_extractor
 chunk = 250  # length of time between measurements  in ms
 incorrectPenalty = 20  # penalty for being out of tune
-ratings = []
+
 
 def pitchMatch(pitch1, pitch2, pitchTolerance):
     """
