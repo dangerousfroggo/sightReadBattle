@@ -3,7 +3,7 @@ import audio_pitch_extractor
 chunk = 250  # length of time between measurements  in ms
 incorrectPenalty = 20  # penalty for being out of tune
 semitoneRounded = 1.0594630943593
-
+errorMult = 2
 
 
 """
