@@ -21,7 +21,7 @@ def mainLoop():
         # if pitch is not None:
         #     result = audio_pitch_extractor.freq_to_note(pitch)
         #     print(result)
-        rating = pitchMatching.noteMatch(pitch, note["pitch"],10 )
+        rating = pitchMatching.noteMatch(note["pitch"],pitch,10 )
         print(rating)
         time.sleep(60.0/bpm)
 
