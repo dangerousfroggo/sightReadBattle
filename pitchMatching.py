@@ -3,8 +3,7 @@ import audio_pitch_extractor
 chunk = 250  # length of time between measurements  in ms
 incorrectPenalty = 20  # penalty for being out of tune
 semitoneRounded = 1.0594630943593
-semitoneErrorMult = 4 #multiplier for error within a semitone
-overSemitoneErrorMult = 8 #multiplier for error over a semitone
+
 
 """
 pitch matching function
