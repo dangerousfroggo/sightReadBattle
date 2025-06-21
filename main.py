@@ -10,14 +10,3 @@ import requests
 musicFile = "BeetAnGeSample.musicxml"
 bpm = 120
 intendedNotes = noteToEvent.xmlToEvent(musicFile, bpm)
-def mainLoop():
-    for note in intendedNotes:
-        print(note)
-        pitch = audio_pitch_extractor.getCurrentPitch()
-        if pitch is not None:
-            result = pitchMatching.pitchMatchesNote(pitch, note)
-            print(result)
-        time.sleep(60.0/bpm)
-
-if __name__ == "__main__":
-    mainLoop()
