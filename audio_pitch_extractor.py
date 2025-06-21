@@ -79,17 +79,13 @@ def detect_pitch(int_data):
 
 if __name__ == "__main__":
 	stream_in = p.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, stream_callback=callback_in)
-	stream_out = p.open(format=FORMAT, channels=CHANNELS, rate=RATE, output=True, stream_callback=callback_out)
 
 	stream_in.start_stream()
-	stream_out.start_stream()
 
 	txt = input()	#stream until enter key press
 
 	stream_in.stop_stream()
 	stream_in.close()
-	stream_out.stop_stream()
-	stream_out.close()
 
 	p.terminate()
 
