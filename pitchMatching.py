@@ -15,9 +15,12 @@ otherwise returns incorrectPenalty for errors greater than the pitchTolerance
 """
 def pitchMatch(pitch1, pitch2, pitchTolerance):
     
+    # if within a semitone, calculate the error percentage
+    # if within a full note, return the incorrect penalty
+    # if more than a full note off, return 0
+
+
     diff = abs(pitch1 - pitch2)
-
-
 
 
     return diff if diff < pitchTolerance else incorrectPenalty
