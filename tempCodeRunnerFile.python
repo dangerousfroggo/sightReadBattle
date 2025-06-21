@@ -1,0 +1,26 @@
+import sounddevice as sd
+import numpy as np
+from scipy.fft import rfft, rfftfreq
+
+DURATION = 5  # seconds
+FS = 44100    # sample rate
+
+def record_audio(duration, fs):
+    print(f"Recording for {duration} seconds...")
+    audio = sd.rec(int(duration * fs), samplerate=fs, channels=1, dtype='float64')
+    sd.wait()
+    return audio.flatten()
+
+def extract_pitch(audio, fs):
+    N = len(audio)
+    yf = np.abs(rfft(audio))
+    xf = rfftfreq(N, 1 / fs)
+    idx = np.argmax(yf)
+    freq = xf[idx]
+    return freq
+
+if __name__ == "__main__":
+    while True:
+        audio = record_audio(DURATION, FS)
+        freq = extract_pitch(audio, FS)
+        print(f"Dominant frequency: {freq:.2f} Hz")
