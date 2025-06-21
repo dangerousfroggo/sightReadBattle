@@ -57,7 +57,8 @@ def get_note_volume(duration=0.1):
     stream.close()
     p.terminate()
     print(volume)
-    
+    return volume
+
 def main():
     print("Testing get_note_freq() - Speak or play a note now...")
     try:
