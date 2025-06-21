@@ -30,15 +30,25 @@ def autocorrelation_pitch(signal, fs):
         return 0
     return fs / peak
 
-def main():
+def get_note_freq(duration=0.1):
+    """
+    Records `duration` seconds of audio and returns the frequency (Hz) corresponding to the note played.
+    """
     p = pyaudio.PyAudio()
-    stream = p.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
-    print("Listening... Press Ctrl+C to stop.")
+    stream = p.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=int(RATE * duration))
+    data = stream.read(int(RATE * duration), exception_on_overflow=False)
+    audio = np.frombuffer(data, dtype=np.int16).astype(np.float32)
+    freq = autocorrelation_pitch(audio, RATE)
+    stream.stop_stream()
+    stream.close()
+    p.terminate()
+    return freq
+
+def main():
+    print("Testing get_note_freq() - Speak or play a note now...")
     try:
         while True:
-            data = stream.read(CHUNK, exception_on_overflow=False)
-            audio = np.frombuffer(data, dtype=np.int16).astype(np.float32)
-            freq = autocorrelation_pitch(audio, RATE)
+            freq = get_note_freq(0.075) # Short duration for quick response
             note = freq_to_note(freq)
             if note:
                 print(f"Detected note: {note} ({freq:.2f} Hz)      ", end='\r')
@@ -46,9 +56,6 @@ def main():
                 print("No note detected.                ", end='\r')
     except KeyboardInterrupt:
         print("\nStopped.")
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
 
 if __name__ == "__main__":
     main()
