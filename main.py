@@ -9,7 +9,7 @@ import requests
 
 
 ratings = []
-musicFile = "BeetAnGeSample.musicxml"
+musicFile = "simple_test_piece.musicxml"
 bpm = 120
 intendedNotes = noteToEvent.xmlToEvent(musicFile, bpm)
 def mainLoop():
@@ -21,7 +21,7 @@ def mainLoop():
         # if pitch is not None:
         #     result = audio_pitch_extractor.freq_to_note(pitch)
         #     print(result)
-        rating = pitchMatching.noteMatch(note,pitch,10 )
+        rating = pitchMatching.noteMatch(note, pitch)
         print(rating)
         time.sleep(60.0/bpm)
 

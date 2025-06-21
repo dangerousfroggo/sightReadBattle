@@ -2,8 +2,8 @@ import time
 import audio_pitch_extractor
 chunk = 250  # length of time between measurements  in ms
 incorrectPenalty = 20  # penalty for being out of tune
-semitoneRounded = 1.0594630943593
-errorMult = 2
+semitoneRounded = 5.94630943593
+
 
 
 """
@@ -13,25 +13,27 @@ returns the % error * overSemitoneErrorMult if over a semitone,
 otherwise returns incorrectPenalty for errors greater than the pitchTolerance
 
 """
-def pitchMatch(pitch1, pitch2, pitchTolerance):
-    
-    # if within a 1/4 tone, give 100/100
-    # if within a semitone, calculate the error percentage
-    # if within a full note, return the incorrect penalty
-    # if more than a full note off, return 0
+def pitchMatch(currentPitch, targetPitch):
+    if targetPitch != 0:
+        percentageError = (abs(currentPitch - targetPitch) / targetPitch) * 100  # percentage error relative to target pitch
+
+        if percentageError < semitoneRounded / 2:  # within a 1/4 tone
+          return 100
+        elif percentageError < semitoneRounded * 2:
+        # Scale from 100 to 0
+          return 100 - percentageError*percentageError
+        else:
+            return 0  # more than a full tone off
+    else:
+        if currentPitch < 26 or currentPitch > 4186 or volumeExtractor.quietCheck():
+            return 100  # if target pitch is 0, we assume the player is not playing a note
 
 
-    diff = abs(pitch1 - pitch2)
-
-
-    return diff if diff < pitchTolerance else incorrectPenalty
-
-def noteMatch(intendedNote, playedNoteFunc, tolerance):
+def noteMatch(intendedNote, playedNoteFunc):
     """
     Compares player's pitch with intended pitch every chunk ms
     - `intendedNote`: dict with 'time', 'duration', 'pitch'
     - `playedNoteFunc`: function returning current pitch
-    - `tolerance`: pitch tolerance
     returns rating integer 0-100
     """
     rating = 100
@@ -42,11 +44,8 @@ def noteMatch(intendedNote, playedNoteFunc, tolerance):
 
     while currentTime < endTime:
         currentPitch = audio_pitch_extractor.get_note_freq(0.075) # get the current pitch
-        penalty = pitchMatch(currentPitch, targetPitch, tolerance)
-        rating -= penalty
-        rating = max(rating, 0)  # prevent negative score
+        rating = max(pitchMatch(currentPitch, targetPitch), 0)  # prevent negative score
         time.sleep(chunk / 1000)  # wait chunk milliseconds
         currentTime += chunk
 
     return rating
-
