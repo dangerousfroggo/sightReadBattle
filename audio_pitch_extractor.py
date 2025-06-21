@@ -56,6 +56,9 @@ def get_note_volume(duration=0.1):
     stream.stop_stream()
     stream.close()
     p.terminate()
+
+    print("volume", volume)
+
     return volume
 
 def main():
