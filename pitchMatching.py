@@ -14,7 +14,7 @@ otherwise returns incorrectPenalty for errors greater than the pitchTolerance
 
 """
 def pitchMatch(currentPitch, targetPitch):
-    print(currentPitch, targetPitch, "test")
+    print("cur", currentPitch, "; target", targetPitch)
     if targetPitch != 0:
         percentageError = (abs(currentPitch - targetPitch) / targetPitch) * 100  # percentage error relative to target pitch
         print("percentage error " + str(percentageError))
@@ -33,11 +33,10 @@ def pitchMatch(currentPitch, targetPitch):
             return 0
 #  or volumeExtractor.quietCheck()
 
-def noteMatch(intendedNote, playedNoteFunc):
+def noteMatch(intendedNote):
     """
     Compares player's pitch with intended pitch every chunk ms
     - `intendedNote`: dict with 'time', 'duration', 'pitch'
-    - `playedNoteFunc`: function returning current pitch
     returns rating integer 0-100
     """
     rating = 100
@@ -49,6 +48,8 @@ def noteMatch(intendedNote, playedNoteFunc):
     while currentTime < endTime:
         currentPitch = audio_pitch_extractor.get_note_freq(0.075) # get the current pitch
         rating = max(pitchMatch(currentPitch, targetPitch), 0)  # prevent negative score
+        print("rating", rating)
+        
         time.sleep(chunk / 1000)  # wait chunk milliseconds
         currentTime += chunk
 
