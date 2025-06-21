@@ -26,7 +26,7 @@ def noteMatch(intendedNote, playedNoteFunc, tolerance):
     currentTime = startTime
 
     while currentTime < endTime:
-        currentPitch = audio_pitch_extractor.("INSERT THE FUNCTION HERE")  # get the current pitch
+        currentPitch = audio_pitch_extractor.get_note_freq(0.075) # get the current pitch
         penalty = pitchMatch(currentPitch, targetPitch, tolerance)
         rating -= penalty
         rating = max(rating, 0)  # prevent negative score
