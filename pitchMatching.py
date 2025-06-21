@@ -5,14 +5,13 @@ incorrectPenalty = 20  # penalty for being out of tune
 semitoneRounded = 5.94630943593
 
 
-
 """
 pitch matching function
 takes 2 pitches in hz, returns the % error * semitoneErrorMult if within a semitone
 returns the % error * overSemitoneErrorMult if over a semitone, 
 otherwise returns incorrectPenalty for errors greater than the pitchTolerance
-
 """
+
 def pitchMatch(currentPitch, targetPitch):
     print("cur", currentPitch, "; target", targetPitch)
     if targetPitch != 0:
