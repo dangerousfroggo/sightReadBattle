@@ -2,13 +2,24 @@ import time
 import audio_pitch_extractor
 chunk = 250  # length of time between measurements  in ms
 incorrectPenalty = 20  # penalty for being out of tune
+semitoneRounded = 1.0594630943593
+semitoneErrorMult = 4 #multiplier for error within a semitone
+overSemitoneErrorMult = 8 #multiplier for error over a semitone
 
+"""
+pitch matching function
+takes 2 pitches in hz, returns the % error * semitoneErrorMult if within a semitone
+returns the % error * overSemitoneErrorMult if over a semitone, 
+otherwise returns incorrectPenalty for errors greater than the pitchTolerance
 
+"""
 def pitchMatch(pitch1, pitch2, pitchTolerance):
-    """
-    Returns pitch error if within tolerance, otherwise returns incorrectPenalty
-    """
+    
     diff = abs(pitch1 - pitch2)
+
+
+
+
     return diff if diff < pitchTolerance else incorrectPenalty
 
 def noteMatch(intendedNote, playedNoteFunc, tolerance):
