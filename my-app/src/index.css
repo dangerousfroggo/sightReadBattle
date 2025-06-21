@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Pangolin", cursive;
   line-height: 1.5;
   font-weight: 400;
 
