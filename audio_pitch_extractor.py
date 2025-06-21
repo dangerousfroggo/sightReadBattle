@@ -1,43 +1,59 @@
-import sounddevice as sd
-import numpy as np
-from scipy.fft import rfft, rfftfreq
+import pyaudio
 import time
-import mido
+import numpy as np
+import math
+from collections import Counter
 
-FRAME_DURATION = 0.2  # seconds (analyze every 0.2s)
-FS = 44100    # sample rate
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 44100
+CHUNK = 2048  # Larger chunk for better pitch accuracy
 
-def record_audio(duration, fs):
-    audio = sd.rec(int(duration * fs), samplerate=fs, channels=1, dtype='float64')
-    sd.wait()
-    return audio.flatten()
+NOTE_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 
-def extract_pitch(audio, fs):
-    N = len(audio)
-    yf = np.abs(rfft(audio))
-    xf = rfftfreq(N, 1 / fs)
-    idx = np.argmax(yf)
-    freq = xf[idx]
-    return freq
-
-def freq_to_midi_note(freq):
+def freq_to_note(freq):
     if freq <= 0:
         return None
-    midi_note = x
-    return midi_note
+    midi = int(round(69 + 12 * np.log2(freq / 440)))  # MIDI note number
+    note_name = NOTE_NAMES[midi % 12]
+    octave = midi // 12 - 1
+    return f"{note_name}{octave}"
+
+def autocorrelation_pitch(signal, fs):
+    signal = signal - np.mean(signal)
+    corr = np.correlate(signal, signal, mode='full')
+    corr = corr[len(corr)//2:]
+    d = np.diff(corr)
+    start = np.where(d > 0)[0][0]
+    peak = np.argmax(corr[start:]) + start
+    if peak == 0:
+        return 0
+    return fs / peak
+
+def get_note_freq(duration=0.1):
+    """
+    Records `duration` seconds of audio and returns the frequency (Hz) corresponding to the note played.
+    """
+    p = pyaudio.PyAudio()
+    stream = p.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=int(RATE * duration))
+    data = stream.read(int(RATE * duration), exception_on_overflow=False)
+    audio = np.frombuffer(data, dtype=np.int16).astype(np.float32)
+    freq = autocorrelation_pitch(audio, RATE)
+    stream.stop_stream()
+    stream.close()
+    p.terminate()
+    return freq
 
 def main():
-    print("Press Ctrl+C to stop.")
+    print("Testing get_note_freq() - Speak or play a note now...")
     try:
         while True:
-            audio = record_audio(FRAME_DURATION, FS)
-            freq = extract_pitch(audio, FS)
-            midi_note = freq_to_midi_note(freq)
-            if midi_note is not None:
-                print(f"Dominant frequency: {freq:.2f} Hz, MIDI note: {midi_note}")
+            freq = get_note_freq(0.075) # Short duration for quick response
+            note = freq_to_note(freq)
+            if note:
+                print(f"Detected note: {note} ({freq:.2f} Hz)      ", end='\r')
             else:
-                print(f"Dominant frequency: {freq:.2f} Hz, MIDI note: N/A")
-            time.sleep(0.1)  # Wait for the rest of the 5 seconds
+                print("No note detected.                ", end='\r')
     except KeyboardInterrupt:
         print("\nStopped.")
 
