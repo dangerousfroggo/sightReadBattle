@@ -14,7 +14,7 @@ NOTE_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 def freq_to_note(freq):
     if freq <= 0:
         return None
-    midi = int(round(69 + 12 * np.log2(freq / 440)))
+    midi = int(round(69 + 12 * np.log2(freq / 440)))  # MIDI note number
     note_name = NOTE_NAMES[midi % 12]
     octave = midi // 12 - 1
     return f"{note_name}{octave}"
