@@ -23,7 +23,7 @@ def mainLoop():
         rating = pitchMatching.noteMatch(note)
 
         time.sleep(60.0/bpm)
-        print("volume", audio_pitch_extractor.get_note_volume())
+        # print("volume", audio_pitch_extractor.get_note_volume())
         print()
         
 
