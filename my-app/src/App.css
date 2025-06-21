@@ -3,6 +3,13 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  height: 100%;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 .logo {
@@ -11,12 +18,18 @@
   will-change: filter;
   transition: filter 300ms;
 }
-.logo:hover {
+/* .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
+} */
+/* .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
-}
+} */
+
+/* .page-background {
+  background-image: red;
+} */
+
+
 
 @keyframes logo-spin {
   from {
@@ -33,12 +46,51 @@
   }
 }
 
-.gamemode-buttons-container {
+/* .logo-cleffy {
+  display: block;
+  width: 50vw;     
+  max-width: 80%;          
+  height: auto;
+  margin-bottom: 0;
+  margin-top: 3rem;
   position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  display: flex;
+} */
+
+.title {
+  display: flex;
+  justify-content: center;  /* horizontal centering */
+  align-items: center;      /* vertical centering (if you care) */
+  margin-top: 3rem;
+}
+
+.logo-cleffy {
+  width: 60vw;
+  max-width: 80%;
+  height: auto;
+  margin: 0;
+}
+
+.buttons-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.gamemode-buttons-container {
   display: grid;
   justify-content: center;
   align-items: center;
   font-size: 30px;
+  margin-top: 0;        /* remove unnecessary top space */
+  margin-bottom: 1rem;
 }
 
 .gamemode{
@@ -47,7 +99,7 @@
   justify-content: center;
   height: 8vh;            /* smaller vertical size */
   width: 60vh;            /* or fixed width like 200px */
-  font-size: 1.5rem;      /* scale down font to match smaller height */
+  font-size: 2rem;      /* scale down font to match smaller height */
   background-color: #1a1a1a;
   color: white;
   border-radius: 10px;
@@ -59,9 +111,43 @@
 }
 
 .options{
+  width: 6vw;
+  height: 6vw;
+  padding: 0.5rem;
+  margin: 0, 0.5rem, 0, 0.5rem;
+}
+
+.battlefield {
+  width: 100%;
+  height: 100%;
+}
+
+.sheet-music-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48vw;
+  height: 60vh;
+  background-color: white;
+  z-index: 1;
+}
+
+.player-1-character {
+  position: absolute;
+  background-color: green;
   width: 10vw;
   height: 10vw;
-  padding: 0.5rem;
+  bottom: 0;
+  left: 5rem;
+}
+
+.player-2-character {
+  position: absolute;
+  background-color: red;
+  width: 10vw;
+  height: 10vw;
+  bottom: 0;
+  right: 5rem;
 }
 
 button {
@@ -70,4 +156,38 @@ button {
 
 .read-the-docs {
   color: #888;
+}
+
+.podium {
+  /* background-color: pink; */
+  height: 25rem;
+  width: 40rem;
+  bottom: 0;
+  left: 15rem;
+  position: absolute;
+  display: flex;
+}
+
+.podium-player1 {
+  position: absolute;
+  bottom: 0;
+  background-color: #888;
+  height: var(--podium1-height);
+  width: 10rem;
+}
+
+.podium-player2 {
+  position: absolute;
+  bottom: 0;
+  margin-left: 20rem;
+  background-color: skyblue;
+  height: var(--podium2-height);
+  width: 10rem;
+}
+
+.results-container {
+  right: 15rem;
+  bottom: 20rem;
+  position: absolute;
+  font-size: 2rem;
 }
