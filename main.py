@@ -11,6 +11,7 @@ import requests
 ratings = []
 musicFile = "simple_test_piece.musicxml"
 bpm = 120
+bpm = 120
 intendedNotes = noteToEvent.xmlToEvent(musicFile, bpm)
 def mainLoop():
     for note in intendedNotes:
