@@ -25,7 +25,7 @@ def pitchMatch(currentPitch, targetPitch):
         else:
             return 0  # more than a full tone off
     else:
-        if currentPitch < 26 or currentPitch > 4186 or volumeExtractor.quietCheck():
+        if currentPitch < 26 or currentPitch > 4186:
             return 100  # if target pitch is 0, we assume the player is not playing a note
 
 
