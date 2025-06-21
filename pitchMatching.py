@@ -14,8 +14,10 @@ otherwise returns incorrectPenalty for errors greater than the pitchTolerance
 
 """
 def pitchMatch(currentPitch, targetPitch):
+    print(currentPitch, targetPitch, "test")
     if targetPitch != 0:
         percentageError = (abs(currentPitch - targetPitch) / targetPitch) * 100  # percentage error relative to target pitch
+        print("percentage error " + str(percentageError))
 
         if percentageError < semitoneRounded / 2:  # within a 1/4 tone
           return 100
@@ -25,9 +27,11 @@ def pitchMatch(currentPitch, targetPitch):
         else:
             return 0  # more than a full tone off
     else:
-        if currentPitch < 26 or currentPitch > 4186 or volumeExtractor.quietCheck():
+        if currentPitch < 26 or currentPitch > 4186:
             return 100  # if target pitch is 0, we assume the player is not playing a note
-
+        else:
+            return 0
+#  or volumeExtractor.quietCheck()
 
 def noteMatch(intendedNote, playedNoteFunc):
     """
