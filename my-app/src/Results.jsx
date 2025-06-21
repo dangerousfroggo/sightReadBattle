@@ -4,7 +4,7 @@ import resultsBackground from './assets/results_background.png'
 
 export default function Results() {
     const [endingMessage, setEndingMessage] = useState("")
-    const [player1Height, setPlayer1Height] = useState("100%") // Example heights, adjust as needed
+    const [player1Height, setPlayer1Height] = useState("50%") // Example heights, adjust as needed
     const [player2Height, setPlayer2Height] = useState("70%")
     
     useEffect(() => {
@@ -33,7 +33,7 @@ export default function Results() {
             <div 
                 className="results-background"
                 style={{
-                    backgroundImage: `url(${resultsBackground.png})`,
+                    backgroundImage:`url(${resultsBackground})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
@@ -58,7 +58,7 @@ export default function Results() {
                 />
             </div>
             <div className="results-container">
-                <h1>{endingMessage}</h1>
+                <h1 className="ending-message">{endingMessage}</h1>
                 <button className="go-back" onClick={() => window.location.href = "/"}>back to title page</button> 
             </div>
             </div>

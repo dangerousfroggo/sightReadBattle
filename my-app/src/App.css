@@ -100,7 +100,6 @@ html, body {
   height: 8vh;            /* smaller vertical size */
   width: 60vh;            /* or fixed width like 200px */
   font-size: 2rem;      /* scale down font to match smaller height */
-  background-color: #1a1a1a;
   color: white;
   border-radius: 10px;
   margin: 8px 0;
@@ -130,19 +129,68 @@ html, body {
   height: 60vh;
   background-color: white;
   z-index: 1;
+  position: absolute;
 }
 
-.player-1-character {
+.player-1-sprite {
   position: absolute;
-  background-color: green;
-  width: 10vw;
+  width: auto;
   height: 10vw;
-  bottom: 0;
-  left: 5rem;
+  bottom: 44rem;
+  left: 6rem;
 }
+
+.player-1-stats {
+  height: 30rem;
+}
+
+/* .player-1-bar {
+  position: absolute;
+  border-radius: 80px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #5C5046;
+  width: 2.5vw;
+  height: 30rem;
+  bottom: 15rem;
+  left: 9rem
+}
+
+.player-1-accuracy {
+  position: absolute;
+  background-color: #587EB4;
+  border-radius: 80px;
+  border-style: solid;
+  border-width: 2px;
+  width: 2.5vw;
+  bottom: 15rem;
+  left: 9rem;
+  height: var(--player1-accuracy-height);
+} */
+
+.player-1-bar {
+  position: absolute;
+  bottom: 15rem;
+  left: 9rem;
+  width: 2.5vw;
+  height: 30rem;
+  border-radius: 80px;
+  border: 2px solid #F0B041;
+  display: flex;
+  align-items: flex-end; /* makes .player-1-accuracy grow UP from bottom */
+  overflow: hidden;
+}
+
+.player-1-accuracy {
+  background-color: #587EB4;
+  width: 100%;
+  border-radius: 80px 80px 0 0;
+  transition: height 0.3s ease;
+}
+
 
 .player-2-character {
-  position: absolute;
+  position: relative;
   background-color: red;
   width: 10vw;
   height: 10vw;
@@ -152,6 +200,16 @@ html, body {
 
 button {
   margin: 0.3rem;
+  background-color: #587EB4;
+  opacity: 0.99;
+}
+
+#competitive {
+ background-color: #D43F55; 
+}
+
+#practice {
+  background-color: #F0B041;
 }
 
 .read-the-docs {
@@ -171,7 +229,7 @@ button {
 .podium-player1 {
   position: absolute;
   bottom: 0;
-  background-color: #888;
+  background-color: #4E7EB8;
   height: var(--podium1-height);
   width: 10rem;
 }
@@ -180,7 +238,7 @@ button {
   position: absolute;
   bottom: 0;
   margin-left: 20rem;
-  background-color: skyblue;
+  background-color: #D43F55;
   height: var(--podium2-height);
   width: 10rem;
 }
@@ -190,4 +248,11 @@ button {
   bottom: 20rem;
   position: absolute;
   font-size: 2rem;
+  background-color: #F0B041;
+  padding: 2rem 3.5rem 1rem 3.5rem;
+  border-radius: 20px;
+}
+
+.go-back {
+  margin-bottom: 1rem;
 }

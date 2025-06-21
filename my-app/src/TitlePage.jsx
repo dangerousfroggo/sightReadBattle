@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 import cleffyTitle from './assets/cleffy_neutral.png'
-import backgroundImage from './assets/background.png'
+import backgroundImage from './assets/upgraded_background_title.png'
 
 export default function TitlePage() {
 
@@ -29,17 +30,21 @@ export default function TitlePage() {
             </div>
             <div className="buttons-container">
                 <div className="gamemode-buttons-container"> {/* this contains the buttons of casual, competitive, and practice */}
-                        <button className="gamemode">
+                    <Link>
+                        <button className="gamemode" id="casual">
                             casual
                         </button>
+                    </Link>
                     <Link to="/competitive">
-                        <button className="gamemode">
+                        <button className="gamemode" id="competitive">
                             competitive
                         </button>
                     </Link>
-                        <button className="gamemode">
+                    <Link to="/practice">
+                        <button className="gamemode" id="practice">
                             practice
                         </button>
+                    </Link>
                 </div>
                 <div className="options-buttons-container"> {/* this contains the buttons of options, settings, and profile */}
                     <button className="options">
