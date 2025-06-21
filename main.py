@@ -13,9 +13,10 @@ intendedNotes = noteToEvent.xmlToEvent(musicFile, bpm)
 def mainLoop():
     for note in intendedNotes:
         print(note)
-        pitch = audio_pitch_extractor.getCurrentPitch()
+        pitch = audio_pitch_extractor.get_note_freq()
+        print(pitch)
         if pitch is not None:
-            result = pitchMatching.pitchMatchesNote(pitch, note)
+            result = audio_pitch_extractor.freq_to_note(pitch)
             print(result)
         time.sleep(60.0/bpm)
 
