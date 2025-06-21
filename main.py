@@ -14,10 +14,10 @@ def mainLoop():
     for note in intendedNotes:
         print(note)
         pitch = audio_pitch_extractor.get_note_freq()
-        print(pitch)
-        # if pitch is not None:
-        #     result = audio_pitch_extractor.freq_to_note(pitch)
-        #     print(result)
+        # print(pitch)
+        if pitch is not None:
+            result = audio_pitch_extractor.freq_to_note(pitch)
+            print(pitch, result)
         time.sleep(60.0/bpm)
 
 if __name__ == "__main__":
