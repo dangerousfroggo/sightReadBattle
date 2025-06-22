@@ -7,6 +7,7 @@ import './App.css'
 // pages
 import TitlePage from './TitlePage'
 import Competitive from './Competitive'
+import Practice from './Practice'
 import Results from './Results'
 
 import { HashRouter as Router, Route, Routes } from 'react-router-dom'
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<TitlePage/>} />
           <Route path="/competitive" element={<Competitive />} />
+          <Route path="/practice" element={<Practice />} />
           <Route path="/results" element={<Results />} />
           {/* Add more routes as needed */}
         </Routes>

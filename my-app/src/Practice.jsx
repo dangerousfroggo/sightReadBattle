@@ -2,17 +2,19 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import backgroundImage from './assets/upgraded_background_title.png'
+import player1Sprite from './assets/player-1-sprite.png'
 
-export default function Competitive() {
+
+export default function Practice() {
+    const [playerAccuracy, setPlayerAccuracy] = useState("50%") // Example heights, adjust as needed
     const navigate = useNavigate();
 
     const [player1Finished, setPlayer1Finished] = useState(false);
-    const [player2Finished, setPlayer2Finished] = useState(true); // to determine when we move onto the next screen?
 
     useEffect(() => {
         const goToResults = async () => {
             try {
-                if (player1Finished && player2Finished) {
+                if (player1Finished) {
                     // Navigate to results page when both players have finished
                     navigate('/results');
                 }
@@ -21,7 +23,13 @@ export default function Competitive() {
             }
         };
         goToResults();
-    }, [player1Finished, player2Finished]);
+    }, [player1Finished]);
+
+    useEffect(() => {
+        const displayPlayerAccuracy = () => {
+
+        }
+    })
 
     return (
         <>
@@ -46,21 +54,21 @@ export default function Competitive() {
                         alignItems: "center",
                     }}
                 >
-                    <div className="player-1-character">
-                        {/* this is where player 1's character will be displayed */}
+                    <div className="player-1-stats">
+                        <div className="player-1-bar">
+                            <div 
+                                className="player-1-accuracy"
+                                style={{ height: playerAccuracy }}
+                            />
+                        </div>
+                        <img src={player1Sprite} className="player-1-sprite" alt="Player 1 Sprite" />
                     </div>
 
                     <div className="sheet-music-container">
                         {/* this is where the sheet music will be displayed*/}
-                    </div>
-
-                    <div className="player-2-character">
-                        {/* this is where player 2's character will be displayed */}
                     </div>
                 </div>
             </div>
         </>
     )
 }
-
-
