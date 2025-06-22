@@ -9,7 +9,6 @@ import requests
 
 from flask import Flask, jsonify, request
 import threading                           # To run sightreading in parallel
-import requests                            # To call internal HTTP endpoints (optional)
 import time                                # For delays between notes
 import audio_pitch_extractor              # Your custom pitch detection module
 import pitchMatching                       # Your custom pitch rating logic

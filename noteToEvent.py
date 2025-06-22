@@ -1,4 +1,5 @@
 from music21 import *
+
 def xmlToEvent(xmlFile, bpm = 60):
     """
     Converts a music21 stream (parsed from an xml file) into a list of events
