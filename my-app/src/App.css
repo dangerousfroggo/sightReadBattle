@@ -137,36 +137,12 @@ html, body {
   width: auto;
   height: 10vw;
   bottom: 44rem;
-  left: 6rem;
+  left: 4rem;
 }
 
 .player-1-stats {
   height: 30rem;
 }
-
-/* .player-1-bar {
-  position: absolute;
-  border-radius: 80px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #5C5046;
-  width: 2.5vw;
-  height: 30rem;
-  bottom: 15rem;
-  left: 9rem
-}
-
-.player-1-accuracy {
-  position: absolute;
-  background-color: #587EB4;
-  border-radius: 80px;
-  border-style: solid;
-  border-width: 2px;
-  width: 2.5vw;
-  bottom: 15rem;
-  left: 9rem;
-  height: var(--player1-accuracy-height);
-} */
 
 .player-1-bar {
   position: absolute;
@@ -216,7 +192,7 @@ button {
   color: #888;
 }
 
-.podium {
+.podiums-container {
   /* background-color: pink; */
   height: 25rem;
   width: 40rem;
@@ -224,22 +200,25 @@ button {
   left: 15rem;
   position: absolute;
   display: flex;
+  gap: 10rem; /* space between podiums */
 }
 
 .podium-player1 {
+  border-radius: 10px;
   position: absolute;
   bottom: 0;
   background-color: #4E7EB8;
-  height: var(--podium1-height);
+  height: calc(var(--podium1-height) + 1rem);
   width: 10rem;
 }
 
 .podium-player2 {
+  border-radius: 10px;
   position: absolute;
   bottom: 0;
-  margin-left: 20rem;
+  /* margin-left: 20rem; */
   background-color: #D43F55;
-  height: var(--podium2-height);
+  height: calc(var(--podium2-height) + 1rem);
   width: 10rem;
 }
 
@@ -255,4 +234,29 @@ button {
 
 .go-back {
   margin-bottom: 1rem;
+}
+
+.player1-results, .player2-results {
+  position: relative;
+  width: 10rem; /* match podium width */
+  height: 100%; /* keep consistent */
+}
+
+.player1-ending-sprite {
+  position: absolute;
+  bottom: calc(var(--podium1-height) - 10vh);
+  transform: translateX(-50%);
+  width: 10rem;
+  height: auto;
+  z-index: 2;
+}
+
+.player2-ending-sprite {
+  position: absolute;
+  bottom: calc(var(--podium2-height)); 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10rem;
+  height: auto;
+  z-index: 2;
 }
