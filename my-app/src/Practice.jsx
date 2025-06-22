@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import backgroundImage from './assets/upgraded_background_title.png'
 import player1Sprite from './assets/player-1-sprite.png'
+import sheetMusic from './assets/sheet-music.png'
 
 
 export default function Practice() {
@@ -65,7 +66,7 @@ export default function Practice() {
                     </div>
 
                     <div className="sheet-music-container">
-                        {/* this is where the sheet music will be displayed*/}
+                        <img src={sheetMusic} className="sheet-music" alt="Sheet Music" /> 
                     </div>
                 </div>
             </div>

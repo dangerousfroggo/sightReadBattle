@@ -127,7 +127,7 @@ html, body {
   align-items: center;
   width: 48vw;
   height: 60vh;
-  background-color: white;
+  background-color: transparent;
   z-index: 1;
   position: absolute;
 }
