@@ -8,15 +8,17 @@ export default function Results() {
     const [endingMessage, setEndingMessage] = useState("")
     const [player1Height, setPlayer1Height] = useState("50%") // Example heights, adjust as needed
     const [player2Height, setPlayer2Height] = useState("70%")
+    // const [finalScore, setFinalScore] = useState(null);
+
     
     useEffect(() => {
         // set player heights (scores) to useState values
         const determineWinner = () => {
             try {
                 if (parseFloat(player1Height) > parseFloat(player2Height)) {
-                    setEndingMessage("you win!")
+                    setEndingMessage("you won!")
                 } else if (parseFloat(player1Height) < parseFloat(player2Height)) {
-                    setEndingMessage("you lose :(")
+                    setEndingMessage("you lost :(")
                 } else {
                     setEndingMessage("it's a tie... better practice more!")
                 }
@@ -29,6 +31,24 @@ export default function Results() {
             determineWinner();
         }
     }, [player1Height, player2Height]);
+
+    useEffect(() => {
+        const fetchScore = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/final_score');
+                const data = await response.json();
+                setFinalScore(data.score);
+
+                // optionally adjust heights based on score
+                const height = `${Math.min(100, data.score)}%`; // cap at 100%
+                setPlayer1Height(height);
+            } catch (error) {
+                console.error("Failed to fetch score:", error);
+            }
+        };
+
+        fetchScore(); // calling function
+    }, []);
 
     return (
         <>
@@ -59,6 +79,7 @@ export default function Results() {
                             className="podium-player1" 
                             style={{ '--podium1-height': player1Height }}
                         />
+                        <h1 className="player1-accuracy-score">{player1Height}</h1>
                         <img 
                             src={player1Sprite} 
                             className="player1-ending-sprite" 
@@ -72,6 +93,7 @@ export default function Results() {
                             className="podium-player2" 
                             style={{ '--podium2-height': player2Height }}
                         />
+                        <h1 className="player2-accuracy-score">{player2Height}</h1>
                         <img 
                             src={player2Sprite} 
                             className="player2-ending-sprite" 
@@ -79,15 +101,7 @@ export default function Results() {
                             style={{ bottom: player2Height }} 
                         />
                     </div>
-                    {/* <div className="player1-results" style={{ '--podium1-height': player1Height }}>
-                        <div className="podium-player1" />
-                        <img src={player1Sprite} className="player1-ending-sprite" alt="Player 1 sprite" />
-                    </div>
-
-                    <div className="player2-results" style={{ '--podium2-height': player2Height }}>
-                        <div className="podium-player2" />
-                        <img src={player2Sprite} className="player2-ending-sprite" alt="Player 2 sprite" />
-                    </div> */}
+                    
 
 
                 </div>

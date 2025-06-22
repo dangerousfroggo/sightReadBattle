@@ -142,6 +142,26 @@ html, body {
 
 .player-1-stats {
   height: 30rem;
+  background-color: #F0B041;
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  /* height: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  
+  left: 4rem;
+  bottom: 15rem; same as the bar's bottom */
 }
 
 .player-1-bar {
@@ -242,6 +262,15 @@ button {
   height: 100%; /* keep consistent */
 }
 
+.player1-accuracy-score, .player2-accuracy-score {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  z-index: 3; /* ensure it appears above the podium */
+}
+
 .player1-ending-sprite {
   position: absolute;
   bottom: calc(var(--podium1-height) - 10vh);
@@ -259,4 +288,10 @@ button {
   width: 10rem;
   height: auto;
   z-index: 2;
+}
+
+.pitch-accuracy {
+  background-color: #F0B041;
+  height: 5rem;
+  font-size: 1.5rem
 }
