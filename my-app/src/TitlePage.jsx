@@ -3,6 +3,11 @@ import { useState } from 'react';
 
 import cleffyTitle from './assets/cleffy_neutral.png'
 import backgroundImage from './assets/upgraded_background_title.png'
+import infoIcon from './assets/info.png'
+import settingsIcon from './assets/settings.png'
+import userIcon from './assets/user.png'
+
+
 
 export default function TitlePage() {
 
@@ -48,13 +53,13 @@ export default function TitlePage() {
                 </div>
                 <div className="options-buttons-container"> {/* this contains the buttons of options, settings, and profile */}
                     <button className="options">
-                        Options
+                       <img src={infoIcon} className="info-icon" alt="Info icon" />
                     </button>
                     <button className="options">
-                        Settings
+                        <img src={settingsIcon} className="settings-icon" alt="Settings icon" />
                     </button>
                     <button className="options">
-                        Profile
+                        <img src={userIcon} className="user-icon" alt="User icon" />
                     </button>
                 </div>
             </div>
