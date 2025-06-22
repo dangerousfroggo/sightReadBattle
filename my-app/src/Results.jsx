@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 
 import resultsBackground from './assets/results_background.png'
+import player2Sprite from './assets/player-2-sprite.png'
+import player1Sprite from './assets/player-1-sprite.png'
 
 export default function Results() {
     const [endingMessage, setEndingMessage] = useState("")
@@ -44,23 +46,56 @@ export default function Results() {
                     bottom: '0',
                     left: '0',
                     overflow: 'hidden',
-                    maxHeight: '100vh'
+                    maxHeight: '100vh',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end',
+                    padding: '2rem'
                 }}
             >
-                <div className="podium">
-                <div 
-                    className="podium-player1" 
-                    style={{ '--podium1-height': player1Height }}
-                />
-                <div 
-                    className="podium-player2" 
-                    style={{ '--podium2-height': player2Height }}
-                />
-            </div>
-            <div className="results-container">
-                <h1 className="ending-message">{endingMessage}</h1>
-                <button className="go-back" onClick={() => window.location.href = "/"}>back to title page</button> 
-            </div>
+                <div className="podiums-container">
+                    <div className="player1-results">
+                        <div // this is just the podium box
+                            className="podium-player1" 
+                            style={{ '--podium1-height': player1Height }}
+                        />
+                        <img 
+                            src={player1Sprite} 
+                            className="player1-ending-sprite" 
+                            alt="Player 1 sprite" 
+                            style={{ bottom: player1Height }} 
+                        />
+                    </div>
+
+                    <div className="player2-results">
+                        <div // this is just the podium box
+                            className="podium-player2" 
+                            style={{ '--podium2-height': player2Height }}
+                        />
+                        <img 
+                            src={player2Sprite} 
+                            className="player2-ending-sprite" 
+                            alt="Player 2 sprite" 
+                            style={{ bottom: player2Height }} 
+                        />
+                    </div>
+                    {/* <div className="player1-results" style={{ '--podium1-height': player1Height }}>
+                        <div className="podium-player1" />
+                        <img src={player1Sprite} className="player1-ending-sprite" alt="Player 1 sprite" />
+                    </div>
+
+                    <div className="player2-results" style={{ '--podium2-height': player2Height }}>
+                        <div className="podium-player2" />
+                        <img src={player2Sprite} className="player2-ending-sprite" alt="Player 2 sprite" />
+                    </div> */}
+
+
+                </div>
+
+                <div className="results-container">
+                    <h1 className="ending-message">{endingMessage}</h1>
+                    <button className="go-back" onClick={() => window.location.href = "/"}>back to title page</button> 
+                </div>
             </div>
             
         </>
