@@ -1,16 +1,25 @@
 import { useState, useEffect } from "react"
+import { useLocation } from "react-router-dom"
 
 import resultsBackground from './assets/results_background.png'
 import player2Sprite from './assets/player-2-sprite.png'
 import player1Sprite from './assets/player-1-sprite.png'
 
 export default function Results() {
+    const location = useLocation();
     const [endingMessage, setEndingMessage] = useState("")
     const [player1Height, setPlayer1Height] = useState("50%") // Example heights, adjust as needed
     const [player2Height, setPlayer2Height] = useState("70%")
-    // const [finalScore, setFinalScore] = useState(null);
+    const [finalScore, setFinalScore] = useState(null);
 
-    
+    useEffect(() => {
+        // If coming from practice, update player1Height and finalScore
+        if (location.state && location.state.finalScore !== undefined) {
+            setFinalScore(location.state.finalScore);
+            setPlayer1Height(`${Math.round(location.state.finalScore)}%`);
+        }
+    }, [location.state]);
+
     useEffect(() => {
         // set player heights (scores) to useState values
         const determineWinner = () => {
@@ -32,23 +41,7 @@ export default function Results() {
         }
     }, [player1Height, player2Height]);
 
-    useEffect(() => {
-        const fetchScore = async () => {
-            try {
-                const response = await fetch('http://localhost:5000/final_score');
-                const data = await response.json();
-                setFinalScore(data.score);
-
-                // optionally adjust heights based on score
-                const height = `${Math.min(100, data.score)}%`; // cap at 100%
-                setPlayer1Height(height);
-            } catch (error) {
-                console.error("Failed to fetch score:", error);
-            }
-        };
-
-        fetchScore(); // calling function
-    }, []);
+    
 
     return (
         <>
@@ -79,7 +72,7 @@ export default function Results() {
                             className="podium-player1" 
                             style={{ '--podium1-height': player1Height }}
                         />
-                        <h1 className="player1-accuracy-score">{player1Height}</h1>
+                        <h1 className="player1-accuracy-score">{finalScore !== null ? `${Math.round(finalScore)}%` : player1Height}</h1>
                         <img 
                             src={player1Sprite} 
                             className="player1-ending-sprite" 

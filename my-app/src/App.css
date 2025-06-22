@@ -136,7 +136,7 @@ html, body {
   position: absolute;
   width: auto;
   height: 10vw;
-  bottom: 44rem;
+  bottom: 39rem;
   left: 4rem;
 }
 
@@ -166,7 +166,7 @@ html, body {
 
 .player-1-bar {
   position: absolute;
-  bottom: 15rem;
+  bottom: 10rem;
   left: 9rem;
   width: 2.5vw;
   height: 30rem;

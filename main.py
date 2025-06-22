@@ -7,14 +7,13 @@ import queue
 import json
 import requests
 
-from flask import Flask, jsonify, request
 import threading                           # To run sightreading in parallel
 import time                                # For delays between notes
 import audio_pitch_extractor              # Your custom pitch detection module
 import pitchMatching                       # Your custom pitch rating logic
 import noteToEvent         
 
-app = Flask(__name__)
+
 
 ratings = []
 musicFile = "simple_test_piece.musicxml"
@@ -53,14 +52,6 @@ def mainLoop():
 
 
     # sightreading is done
-    try:
-        requests.post("http://localhost:5000/set_sightreading_done")
-    except Exception as e:
-        print("Failed to notify server:", e)
-
-@app.route('/final_score')
-def get_final_score():
-    return jsonify({'score': final_score})
-
+  
 if __name__ == "__main__":
     mainLoop()
