@@ -42,5 +42,6 @@ def mainLoop():
     except Exception as e:
         print("Failed to notify server:", e)
 
+
 if __name__ == "__main__":
     mainLoop()
