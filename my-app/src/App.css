@@ -151,7 +151,7 @@ html, body {
   width: 2.5vw;
   height: 30rem;
   border-radius: 80px;
-  border: 2px solid #F0B041;
+  border: 4.5px solid #F0B041;
   display: flex;
   align-items: flex-end; /* makes .player-1-accuracy grow UP from bottom */
   overflow: hidden;
