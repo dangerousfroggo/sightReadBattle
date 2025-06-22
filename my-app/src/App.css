@@ -125,11 +125,17 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 48vw;
+  width: 60vw;
   height: 60vh;
   background-color: transparent;
   z-index: 1;
   position: absolute;
+}
+
+.sheet-music {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* ensures the image scales properly */
 }
 
 .player-1-sprite {
