@@ -10,6 +10,7 @@ import requests
 
 ratings = []
 musicFile = "simple_test_piece.musicxml"
+
 bpm = 120
 intendedNotes = noteToEvent.xmlToEvent(musicFile, bpm)
 
@@ -34,6 +35,12 @@ def mainLoop():
         
     totalAccuracy = totalRating / numberOfNotes
     print(f"Total accuracy: {totalAccuracy:.2f}%")
+
+    # sightreading is done
+    try:
+        requests.post("http://localhost:5000/set_sightreading_done")
+    except Exception as e:
+        print("Failed to notify server:", e)
 
 if __name__ == "__main__":
     mainLoop()
