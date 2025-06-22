@@ -11,9 +11,12 @@ import requests
 ratings = []
 musicFile = "simple_test_piece.musicxml"
 bpm = 120
-bpm = 120
 intendedNotes = noteToEvent.xmlToEvent(musicFile, bpm)
+
 def mainLoop():
+    numberOfNotes = 0
+    totalRating = 0
+
     for note in intendedNotes:
         print(note)
 
@@ -21,12 +24,16 @@ def mainLoop():
         #     result = audio_pitch_extractor.freq_to_note(pitch)
         #     print(result)
 
+        numberOfNotes += 1
         rating = pitchMatching.noteMatch(note)
+        totalRating += rating
 
         time.sleep(60.0/bpm)
         # print("volume", audio_pitch_extractor.get_note_volume())
         print()
         
+    totalAccuracy = totalRating / numberOfNotes
+    print(f"Total accuracy: {totalAccuracy:.2f}%")
 
 if __name__ == "__main__":
     mainLoop()
