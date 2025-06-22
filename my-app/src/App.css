@@ -273,7 +273,7 @@ button {
 
 .player1-ending-sprite {
   position: absolute;
-  bottom: calc(var(--podium1-height) - 10vh);
+  bottom: var(--podium1-height);
   transform: translateX(-50%);
   width: 10rem;
   height: auto;

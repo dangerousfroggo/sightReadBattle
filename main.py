@@ -5,16 +5,16 @@ import time
 import threading
 import queue
 import json
-import requests
+import requests    
 
-from flask import Flask, jsonify, request
-import threading                           # To run sightreading in parallel
-import time                                # For delays between notes
-import audio_pitch_extractor              # Your custom pitch detection module
-import pitchMatching                       # Your custom pitch rating logic
-import noteToEvent         
+from flask import Flask, jsonify
+from flask_cors import CORS
+from threading import Thread
 
 app = Flask(__name__)
+CORS(app, resources={r"/final_score": {"origins": "http://localhost:5173"}}, supports_credentials=True)
+
+
 
 ratings = []
 musicFile = "simple_test_piece.musicxml"
@@ -23,8 +23,6 @@ bpm = 120
 intendedNotes = noteToEvent.xmlToEvent(musicFile, bpm)
 
 final_score = None  # new global variable
-
-
 
 def mainLoop():
     numberOfNotes = 0
@@ -49,18 +47,27 @@ def mainLoop():
     print(f"Total accuracy: {totalAccuracy:.2f}%")
     
     global final_score
-    final_score = totalRating # is this what the accuracy score is sergei
+    final_score = totalAccuracy
 
 
     # sightreading is done
-    try:
-        requests.post("http://localhost:5000/set_sightreading_done")
-    except Exception as e:
-        print("Failed to notify server:", e)
+    # try:
+    #     requests.post("http://localhost:5000/set_sightreading_done")
+    # except Exception as e:
+    #     print("Failed to notify server:", e)
 
 @app.route('/final_score')
 def get_final_score():
-    return jsonify({'score': final_score})
+    if final_score is not None:
+        print("this is running")
+        return jsonify({'score': final_score})
+    else:
+        return jsonify({'error': 'Score not ready'}), 503
 
 if __name__ == "__main__":
-    mainLoop()
+    # Run mainLoop in a background thread
+    threading.Thread(target=mainLoop).start()
+    
+    # Start the Flask server
+    # app.run(host="0.0.0.0", port=5000)
+    app.run(debug=True, port=5000)

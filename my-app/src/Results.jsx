@@ -6,7 +6,7 @@ import player1Sprite from './assets/player-1-sprite.png'
 
 export default function Results() {
     const [endingMessage, setEndingMessage] = useState("")
-    const [player1Height, setPlayer1Height] = useState("50%") // Example heights, adjust as needed
+    const [player1Height, setPlayer1Height] = useState("0%") // Example heights, adjust as needed
     const [player2Height, setPlayer2Height] = useState("70%")
     // const [finalScore, setFinalScore] = useState(null);
 
@@ -35,20 +35,21 @@ export default function Results() {
     useEffect(() => {
         const fetchScore = async () => {
             try {
-                const response = await fetch('http://localhost:5000/final_score');
-                const data = await response.json();
-                setFinalScore(data.score);
-
-                // optionally adjust heights based on score
-                const height = `${Math.min(100, data.score)}%`; // cap at 100%
-                setPlayer1Height(height);
+                const res = await fetch("http://127.0.0.1:5000/final_score");
+                const data = await res.json();
+                console.log("Final score:", data); // 👈 will log the Python-calculated score
+                console.log(data.score)
+                const twoDecimalScore = parseFloat(data.score).toFixed(2); // Format to two decimal places
+                setPlayer1Height(twoDecimalScore + "%"); // Assuming the score is a percentage
             } catch (error) {
-                console.error("Failed to fetch score:", error);
+                console.error("Error fetching score:", error);
             }
+
         };
 
-        fetchScore(); // calling function
+        fetchScore();
     }, []);
+
 
     return (
         <>
@@ -77,18 +78,22 @@ export default function Results() {
                     <div className="player1-results">
                         <div // this is just the podium box
                             className="podium-player1" 
-                            style={{ '--podium1-height': player1Height }}
+                            style={{
+                                '--podium1-height': `${parseFloat(player1Height) + 15}%`
+                            }}
                         />
                         <h1 className="player1-accuracy-score">{player1Height}</h1>
                         <img 
                             src={player1Sprite} 
                             className="player1-ending-sprite" 
-                            alt="Player 1 sprite" 
-                            style={{ bottom: player1Height }} 
+                            alt="Player 1 sprite"
+                            style={{
+                                bottom: `${parseFloat(player1Height) + 15}%` // Adjust the sprite position based on height
+                            }}
                         />
                     </div>
 
-                    <div className="player2-results">
+                    {/* <div className="player2-results">
                         <div // this is just the podium box
                             className="podium-player2" 
                             style={{ '--podium2-height': player2Height }}
@@ -100,14 +105,13 @@ export default function Results() {
                             alt="Player 2 sprite" 
                             style={{ bottom: player2Height }} 
                         />
-                    </div>
-                    
-
+                    </div> */}
 
                 </div>
 
                 <div className="results-container">
-                    <h1 className="ending-message">{endingMessage}</h1>
+                    {/* <h1 className="ending-message">{endingMessage}</h1> */}
+                    <h1 className="ending-message">always room for improvement!</h1>
                     <button className="go-back" onClick={() => window.location.href = "/"}>back to title page</button> 
                 </div>
             </div>
