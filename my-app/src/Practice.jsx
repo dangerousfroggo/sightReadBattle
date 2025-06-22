@@ -26,15 +26,15 @@ export default function Practice() {
         goToResults();
     }, [player1Finished]);
 
-    useEffect(() => {
-        const displayPlayerAccuracy = () => {
-            try {
-                
-            } catch {
-                console.error("Error displaying player accuracy:", error);
-            }
-        }
-    }, [])
+    // useEffect(() => {
+    //     const displayPlayerAccuracy = () => {
+    //         try {
+
+    //         } catch {
+    //             console.error("Error displaying player accuracy:", error);
+    //         }
+    //     }
+    // }, [])
 
     return (
         <>
