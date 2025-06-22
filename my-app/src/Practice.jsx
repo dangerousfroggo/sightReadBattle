@@ -28,9 +28,13 @@ export default function Practice() {
 
     useEffect(() => {
         const displayPlayerAccuracy = () => {
-
+            try {
+                
+            } catch {
+                console.error("Error displaying player accuracy:", error);
+            }
         }
-    })
+    }, [])
 
     return (
         <>
