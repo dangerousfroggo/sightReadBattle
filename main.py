@@ -7,12 +7,25 @@ import queue
 import json
 import requests
 
+from flask import Flask, jsonify, request
+import threading                           # To run sightreading in parallel
+import requests                            # To call internal HTTP endpoints (optional)
+import time                                # For delays between notes
+import audio_pitch_extractor              # Your custom pitch detection module
+import pitchMatching                       # Your custom pitch rating logic
+import noteToEvent         
+
+app = Flask(__name__)
 
 ratings = []
 musicFile = "simple_test_piece.musicxml"
 
 bpm = 120
 intendedNotes = noteToEvent.xmlToEvent(musicFile, bpm)
+
+final_score = None  # new global variable
+
+
 
 def mainLoop():
     numberOfNotes = 0
@@ -35,6 +48,10 @@ def mainLoop():
         
     totalAccuracy = totalRating / numberOfNotes
     print(f"Total accuracy: {totalAccuracy:.2f}%")
+    
+    global final_score
+    final_score = totalRating # is this what the accuracy score is sergei
+
 
     # sightreading is done
     try:
@@ -42,6 +59,9 @@ def mainLoop():
     except Exception as e:
         print("Failed to notify server:", e)
 
+@app.route('/final_score')
+def get_final_score():
+    return jsonify({'score': final_score})
 
 if __name__ == "__main__":
     mainLoop()
