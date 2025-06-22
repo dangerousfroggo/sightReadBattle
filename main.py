@@ -22,10 +22,10 @@ bpm = 120
 intendedNotes = noteToEvent.xmlToEvent(musicFile, bpm)
 
 final_score = None  # new global variable
-current_rating = 0  # new variable that will hold the current rating
+isDone = False  # new global variable
+
 
 def mainLoop():
-    global current_rating # needed to modify the global variable
     numberOfNotes = 0
     totalRating = 0
 
@@ -39,7 +39,6 @@ def mainLoop():
         numberOfNotes += 1
         rating = pitchMatching.noteMatch(note)
         totalRating += rating
-        current_rating = rating # update the current rating every frame
 
         time.sleep(60.0/bpm)
         # print("volume", audio_pitch_extractor.get_note_volume())
@@ -49,11 +48,10 @@ def mainLoop():
     print(f"Total accuracy: {totalAccuracy:.2f}%")
     
     global final_score
-    final_score = totalRating 
-
+    final_score = totalRating # is this what the accuracy score is sergei
+    isDone = True  # signal that sightreading is done
 
     # sightreading is done
   
 if __name__ == "__main__":
     mainLoop()
-
